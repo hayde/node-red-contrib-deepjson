@@ -1,0 +1,175 @@
+<script type="text/javascript">
+    RED.nodes.registerType('deepjson-get',{
+        category: 'storage',
+        color: '#a6bbcf',
+        defaults: {
+            name: {value:""},
+            host: {value:"deepjson.net",required:true},
+            port: {value:7273,required:true,validate:RED.validators.number()},
+            secret: {value: ""},
+            user: {value: ""},
+            password: {value: ""}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "db.png",
+        label: function() {
+            return this.name||"deepjson-get";
+        }
+    });
+    RED.nodes.registerType('deepjson-post',{
+        category: 'storage',
+        color: '#a6bbcf',
+        defaults: {
+            name: {value:""},
+            host: {value:"deepjson.net",required:true},
+            port: {value:7273,required:true,validate:RED.validators.number()},
+            secret: {value: ""},
+            user: {value: ""},
+            password: {value: ""},
+            storage_type: {value: "get"},
+            function: {value: ""}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "db.png",
+        label: function() {
+            return this.name||"deepjson-post";
+        }
+    });
+    RED.nodes.registerType('deepjson-keys',{
+        category: 'storage',
+        color: '#a6bbcf',
+        defaults: {
+            name: {value:""},
+            host: {value:"deepjson.net",required:true},
+            port: {value:7273,required:true,validate:RED.validators.number()},
+            secret: {value: ""},
+            user: {value: ""},
+            password: {value: ""}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "db.png",
+        label: function() {
+            return this.name||"deepjson-keys";
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="deepjson-get">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-bookmark"></i> Name</label>
+        <input type="text" id="node-input-name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-host"><i class="icon-bookmark"></i> Host</label>
+        <input type="text" id="node-input-host">
+    </div>
+    <div class="form-row">
+        <label for="node-input-port"><i class="icon-bookmark"></i> Port</label>
+        <input type="text" id="node-input-port">
+    </div>
+    <div class="form-row">
+        <label for="node-input-secret"><i class="icon-bookmark"></i> Secret</label>
+        <input type="text" id="node-input-secret">
+    </div>
+    <div class="form-row">
+        <label for="node-input-user"><i class="icon-bookmark"></i> User</label>
+        <input type="text" id="node-input-user">
+    </div>
+    <div class="form-row">
+        <label for="node-input-password"><i class="icon-bookmark"></i> Password</label>
+        <input type="text" id="node-input-password">
+    </div>
+</script>
+
+<script type="text/html" data-template-name="deepjson-post">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-bookmark"></i> Name</label>
+        <input type="text" id="node-input-name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-host"><i class="icon-bookmark"></i> Host</label>
+        <input type="text" id="node-input-host">
+    </div>
+    <div class="form-row">
+        <label for="node-input-port"><i class="icon-bookmark"></i> Port</label>
+        <input type="text" id="node-input-port">
+    </div>
+    <div class="form-row">
+        <label for="node-input-secret"><i class="icon-bookmark"></i> Secret</label>
+        <input type="text" id="node-input-secret">
+    </div>
+    <div class="form-row">
+        <label for="node-input-user"><i class="icon-bookmark"></i> User</label>
+        <input type="text" id="node-input-user">
+    </div>
+    <div class="form-row">
+        <label for="node-input-password"><i class="icon-bookmark"></i> Password</label>
+        <input type="text" id="node-input-password">
+    </div>
+    <div class="form-row">
+        <label for="node-input-storage_type"><i class="icon-bookmark"></i> Storage type</label>
+        <select type="select" id="node-input-storage_type">
+            <option value="get">get - process, but store not</option>
+            <option value="set">set - process and store</option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-function"><i class="icon-bookmark"></i> Function</label>
+        <textarea id="node-input-function" row="60" cols="30"></textarea>
+    </div>
+</script>
+
+<script type="text/html" data-template-name="deepjson-keys">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-bookmark"></i> Name</label>
+        <input type="text" id="node-input-name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-host"><i class="icon-bookmark"></i> Host</label>
+        <input type="text" id="node-input-host">
+    </div>
+    <div class="form-row">
+        <label for="node-input-port"><i class="icon-bookmark"></i> Port</label>
+        <input type="text" id="node-input-port">
+    </div>
+    <div class="form-row">
+        <label for="node-input-secret"><i class="icon-bookmark"></i> Secret</label>
+        <input type="text" id="node-input-secret">
+    </div>
+    <div class="form-row">
+        <label for="node-input-user"><i class="icon-bookmark"></i> User</label>
+        <input type="text" id="node-input-user">
+    </div>
+    <div class="form-row">
+        <label for="node-input-password"><i class="icon-bookmark"></i> Password</label>
+        <input type="text" id="node-input-password">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="deepjson-post">
+    <p>The post function of deepjson. you have to set the server, port, secret, user and password.
+
+        The function section is optinal for a javascript code.
+
+        The message payload has to carry the key as string, or the object: {key: ..., command: ...}
+    </p>
+</script>
+
+
+<script type="text/html" data-help-name="deepjson-get">
+    <p>The getter function of deepjson. you have to set the server, port, secret, user and password.
+
+        The message payload has to carry the key as string, or the object: {key: ..., command: ...}
+    </p>
+</script>
+
+
+<script type="text/html" data-help-name="deepjson-keys">
+    <p>The key function of deepjson. you have to set the server, port, secret, user and password.
+
+        The message payload has to carry the regular expression for the key search.
+    </p>
+</script>

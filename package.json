@@ -1,0 +1,20 @@
+{
+  "name": "node-red-contrib-deepjson",
+  "version": "1.0.0",
+  "description": "deepjson node red client",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "cn.sntrk",
+  "license": "MIT",
+  "dependencies": {
+    "deepjson-js-client": "^1.0.1"
+  },
+  "node-red": {
+    "nodes": {
+      "deepjson-get": "deepjson.js",
+      "deepjson-post": "deepjson.js",
+      "deepjson-keys": "deepjson.js"
+    }
+  }
+}
